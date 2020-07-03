@@ -28,7 +28,7 @@ const Index = () => (
 
     <ThemeSwap />
     <Footer>
-      <Text>Typing game, wow ❤️ </Text>
+      <Text>Typing game, wow ⚡</Text>
     </Footer>
   </Container>
 )
