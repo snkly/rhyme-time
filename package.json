@@ -12,9 +12,14 @@
     "export": "next export"
   },
   "dependencies": {
+    "@chakra-ui/core": "^0.8.0",
+    "@emotion/core": "^10.0.28",
+    "@emotion/styled": "^10.0.27",
     "datamuse": "^1.0.5",
+    "emotion-theming": "^10.0.27",
     "next": "^9.4.4",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "react-hook-form": "^6.0.1"
   }
 }

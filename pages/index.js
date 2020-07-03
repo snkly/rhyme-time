@@ -1,54 +1,36 @@
 import Head from 'next/head'
-import Header from '@components/Header'
-import Footer from '@components/Footer'
+import { Container } from '@components/Container'
+import { Header } from '@components/Header'
+import { Main } from '@components/Main'
+import { Footer } from '@components/Footer'
+import { ThemeSwap } from '@components/ThemeSwap'
 import Game from '@components/Game'
+import {
+  Link as ChakraLink,
+  Text,
+  Code,
+  Icon,
+  List,
+  ListIcon,
+  ListItem,
+} from '@chakra-ui/core'
 
-export default function Home() {
-  return (
-    <div className="container">
-      <Head>
-        <title>Typing game</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+const Index = () => (
+  <Container>
+    <Head>
+      <title>Typing game</title>
+      <link rel="icon" href="/favicon.ico" />
+    </Head>
+    <Main>
+      <Header />
+      <Game />
+    </Main>
 
-      <main>
-        <Header />
-        <Game />
-      </main>
+    <ThemeSwap />
+    <Footer>
+      <Text>Typing game, wow ❤️ </Text>
+    </Footer>
+  </Container>
+)
 
-      <Footer />
-
-      <style jsx>{`
-        .container {
-          height: 100vh;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-        main {
-          padding: 5rem 0;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-      `}</style>
-
-      <style jsx global>{`
-        html,
-        body {
-          padding: 0;
-          margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
-        }
-        * {
-          box-sizing: border-box;
-        }
-      `}</style>
-    </div>
-  )
-}
+export default Index

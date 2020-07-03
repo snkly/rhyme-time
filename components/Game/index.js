@@ -1,4 +1,5 @@
-import { useReducer, useState, useEffect } from "react";
+import { useReducer, useState, useEffect } from "react"
+import { Flex } from '@chakra-ui/core'
 
 export default function Game() {
   let initialState = {
@@ -15,43 +16,44 @@ export default function Game() {
         return { ...state, gameState: "FINISHED" };
       }
       case "RESTART_GAME": {
-        return { ...state, gameState: "STARTED", score: 0};
+        return { ...state, gameState: "STARTED", score: 0 };
       }
       default: {
         throw new Error("What state?")
       }
     }
-  }, initialState); 
+  }, initialState);
 
-  let { gameState, score } = state; 
+  let { gameState, score } = state;
 
-  return <>
-    {gameState === "NOT_STARTED" && (
-      <button onClick={() => {
-        dispatch({ type: "START_GAME" }); 
-      }}>
-        Start Game
-      </button>
-    )}
-    {gameState === "STARTED" && (
-      <button onClick={() => {
-        dispatch({ type: "END_GAME" }); 
-      }}>
-        End Game
-      </button>
-    )}
-    {gameState === "FINISHED" && (
-      <>
-        <div>Score: {score}</div>
+  return (
+    <Flex justifyContent="center" alignItems="center">
+      {gameState === "NOT_STARTED" && (
         <button onClick={() => {
-        dispatch({ type: "RESTART_GAME" }); 
-      }}>
-        Try again
+          dispatch({ type: "START_GAME" });
+        }}>
+          Start Game
+        </button>
+      )}
+      {gameState === "STARTED" && (
+        <button onClick={() => {
+          dispatch({ type: "END_GAME" });
+        }}>
+          End Game
+        </button>
+      )}
+      {gameState === "FINISHED" && (
+        <>
+          <div>Score: {score}</div>
+          <button onClick={() => {
+            dispatch({ type: "RESTART_GAME" });
+          }}>
+            Try again
       </button>
-      </>
-    )}
-    <input onSubmit={(e) => console.log(e.target.value)} />
-    <style jsx>{`
+        </>
+      )}
+      <input onSubmit={(e) => console.log(e.target.value)} />
+      <style jsx>{`
         footer {
           width: 100%;
           height: 100px;
@@ -61,5 +63,6 @@ export default function Game() {
           align-items: center;
         }
       `}</style>
-  </>;
+    </Flex>
+  )
 };
