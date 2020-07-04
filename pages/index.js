@@ -7,6 +7,7 @@ import { ThemeSwap } from '@components/ThemeSwap'
 import Game from '@components/Game'
 import {
   Link as ChakraLink,
+  Box,
   Text,
   Code,
   Icon,
@@ -15,7 +16,7 @@ import {
   ListItem,
 } from '@chakra-ui/core'
 
-const Index = () => (
+const Index = ({ words }) => (
   <Container>
     <Head>
       <title>Typing game</title>
@@ -23,7 +24,10 @@ const Index = () => (
     </Head>
     <Main>
       <Header />
-      <Game />
+      <Game words={words}/>
+      <Box pt={12}>
+        {words.map((e, i) => <span key={i}>{e.word} </span>)}
+      </Box>
     </Main>
 
     <ThemeSwap />
@@ -32,5 +36,17 @@ const Index = () => (
     </Footer>
   </Container>
 )
+
+// https://www.datamuse.com/api/
+export async function getStaticProps() {
+  // adjectives describing javascript sorted by how related they are to programming
+  const res = await fetch('https://api.datamuse.com/words?rel_jjb=javascript&topics=programming')
+  const json = await res.json()
+  return {
+    props: {
+      words: json,
+    },
+  }
+}
 
 export default Index

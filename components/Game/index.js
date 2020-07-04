@@ -1,4 +1,6 @@
-import { useReducer, useState, useEffect } from "react";
+import { useReducer, useState, useEffect } from "react"
+import fetch from 'node-fetch'
+import { useForm } from "react-hook-form"
 import {
   Box,
   FormErrorMessage,
@@ -10,9 +12,8 @@ import {
   Stack,
   Text
 } from "@chakra-ui/core";
-import { useForm } from "react-hook-form"
 
-export default function Game() {
+function Game({ words }) {
   let initialState = {
     gameState: 'NOT_STARTED', // In progress, 
     score: 0,
@@ -65,15 +66,15 @@ export default function Game() {
         onSubmit={handleSubmit(onSubmit)}
         width="100%"
       >
-        <FormControl isInvalid={errors.name} flexGrow="1">
+        <FormControl isInvalid={errors.answer} flexGrow="1">
           <Input
-            name="name"
+            name="answer"
             placeholder="type answers here"
             size="lg"
             ref={register({ validate: validateName })}
           />
           <FormErrorMessage>
-            {errors.name && errors.name.message}
+            {errors.answer && errors.answer.message}
           </FormErrorMessage>
         </FormControl>
         <Button
@@ -124,4 +125,6 @@ export default function Game() {
       </Box>
     </Stack>
   )
-};
+}
+
+export default Game
