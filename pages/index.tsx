@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { GetStaticProps } from 'next'
 import { Container } from '@components/Container'
 import { Header } from '@components/Header'
 import { Main } from '@components/Main'
@@ -8,15 +9,17 @@ import Game from '@components/Game'
 import {
   Link as ChakraLink,
   Box,
-  Text,
-  Code,
-  Icon,
-  List,
-  ListIcon,
-  ListItem,
+  Text
 } from '@chakra-ui/core'
 
-const Index = ({ words }) => (
+const Index = ({ 
+  Words 
+}: {
+  Words: [{
+    word: string
+    score: number
+  }]
+}) => (
   <Container>
     <Head>
       <title>Typing game</title>
@@ -24,9 +27,9 @@ const Index = ({ words }) => (
     </Head>
     <Main>
       <Header />
-      <Game words={words}/>
+      <Game words={ Words }/>
       <Box pt={12}>
-        {words.map((e, i) => <span key={i}>{e.word} </span>)}
+        { Words.map((e: { word: string}, i) => <span key={i}>{ e.word } </span>) }
       </Box>
     </Main>
 
@@ -38,13 +41,14 @@ const Index = ({ words }) => (
 )
 
 // https://www.datamuse.com/api/
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async context => {
   // adjectives describing javascript sorted by how related they are to programming
   const res = await fetch('https://api.datamuse.com/words?rel_jjb=javascript&topics=programming')
   const json = await res.json()
+  console.log(json);
   return {
     props: {
-      words: json,
+      Words: json,
     },
   }
 }
