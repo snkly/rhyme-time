@@ -1,6 +1,7 @@
-import { useReducer, useState, useEffect } from "react"
+import { useReducer, useState } from "react"
+import Link from "next/link";
+import Router from 'next/router'
 import fetch from 'node-fetch'
-import { useForm } from "react-hook-form"
 import {
   Box,
   FormErrorMessage,
@@ -16,7 +17,7 @@ import {
 function Game({ words }) {
   let initialState = {
     gameState: 'NOT_STARTED', // In progress, 
-    score: 0,
+    score: 0
   }
 
   let [state, dispatch] = useReducer((state, action) => {
@@ -37,55 +38,41 @@ function Game({ words }) {
   }, initialState);
 
   let { gameState, score } = state;
-  const { handleSubmit, errors, register, formState } = useForm();
+  const [nickname, setNickname] = useState("");
 
-  function validateName(value) {
-    let error;
-    if (!value) {
-      error = "An answer is required!";
-    } else if (value !== "correct") {
-      error = "Type 'correct', ~validation~";
-    }
-    return error || true;
-  }
-
-  function onSubmit(values) {
-    setTimeout(() => {
-      alert(JSON.stringify(values, null, 2));
-    }, 1000);
-  }
+  const joinRoom = e => {
+    e.preventDefault();
+    Router.push(`/room?u=${nickname}`);
+  };
 
   return (
     <Stack spacing={8} pt="6rem">
-      <Box>
-        <Text fontSize="2xl">I ask you to do something here.</Text>
-      </Box>
-
       <Flex
         as="form"
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={joinRoom}
         width="100%"
       >
-        <FormControl isInvalid={errors.answer} flexGrow="1">
+        <FormControl flexGrow="1">
           <Input
+            id="nickname"
             name="answer"
-            placeholder="type answers here"
+            placeholder="What's your nickname?"
             size="lg"
-            ref={register({ validate: validateName })}
+            onChange={e => setNickname(e.target.value.substr(0, 12))}
           />
-          <FormErrorMessage>
-            {errors.answer && errors.answer.message}
-          </FormErrorMessage>
         </FormControl>
-        <Button
-          variantColor="teal"
-          size="lg"
-          isLoading={formState.isSubmitting}
-          type="submit"
-          flexGrow="0"
+        <Link
+          href={`/room?u=${nickname}`}
         >
-          Submit
+          <Button
+            flexGrow="0"
+            variantColor="teal"
+            size="lg"
+            isDisabled={!nickname}
+          >
+            Join Room
           </Button>
+        </Link>
       </Flex>
 
       <Box>
@@ -119,7 +106,7 @@ function Game({ words }) {
             >
               Try again
            </Button>
-           <Box pt="2rem">Score: {score}</Box>
+            <Box pt="2rem">Score: {score}</Box>
           </>
         )}
       </Box>

@@ -6,6 +6,7 @@ import { Main } from '@components/Main'
 import { Footer } from '@components/Footer'
 import { ThemeSwap } from '@components/ThemeSwap'
 import Game from '@components/Game'
+import { getTimeLeft, getSeconds } from '@utils'
 import {
   Link as ChakraLink,
   Box,
