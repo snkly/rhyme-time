@@ -5,6 +5,7 @@ const RoomPage = ({ nickname }) => <Room nickname={nickname} />;
 
 RoomPage.getInitialProps = ({ req, res, query }) => {
   const { u } = query;
+  console.log(u);
   if (!u) {
     return { nickname: "player" };
   } else {
