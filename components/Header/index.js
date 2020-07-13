@@ -7,5 +7,5 @@ export const Header = ({ title }) => (
 )
 
 Header.defaultProps = {
-  title: 'Typing Game, get ready to type something cool!',
+  title: `Rhyme Time`
 }

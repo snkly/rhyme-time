@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import {
-  AvatarGroup, 
+  AvatarGroup,
   Avatar
 } from "@chakra-ui/core";
 
@@ -8,13 +8,18 @@ const PlayerList = ({ playerList }) => (
   <AvatarGroup>
     {playerList.map((player, i) => {
       if (!player) {
-         return <Avatar key={i} src="https://bit.ly/broken-link" /> 
+        return <Avatar key={i}  />
       } else {
-        return <Avatar key={i} name={player.username + " " + i + 1} />
+        return (
+          <Avatar 
+            key={i} 
+            name={player.username + " " + i + 1} 
+          />
+        )
       }
-          })
+    })
     }
-    </AvatarGroup>
+  </AvatarGroup>
 );
 
 PlayerList.propTypes = {

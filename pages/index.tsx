@@ -5,7 +5,8 @@ import { Header } from '@components/Header'
 import { Main } from '@components/Main'
 import { Footer } from '@components/Footer'
 import { ThemeSwap } from '@components/ThemeSwap'
-import Game from '@components/Game'
+import { Instructions } from '@components/Instructions'
+import Start from '@components/Start'
 import { getTimeLeft, getSeconds } from '@utils'
 import {
   Link as ChakraLink,
@@ -13,38 +14,38 @@ import {
   Text
 } from '@chakra-ui/core'
 
-const Index = ({ 
-  Words 
+const Index = ({
+  Words
 }: {
   Words: [{
     word: string
     score: number
   }]
 }) => (
-  <Container>
-    <Head>
-      <title>Typing game</title>
-      <link rel="icon" href="/favicon.ico" />
-    </Head>
-    <Main>
-      <Header />
-      <Game words={ Words }/>
-      <Box pt={12}>
-        { Words.map((e: { word: string}, i) => <span key={i}>{ e.word } </span>) }
-      </Box>
-    </Main>
+    <Container>
+      <Head>
+        <title>Typing game</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <Main>
+        <Header />
+        <Box pt={6}>
+          <Instructions words={Words}/>
+        </Box>
+        <Start />
+      </Main>
 
-    <ThemeSwap />
-    <Footer>
-      <Text>Typing game, wow ⚡</Text>
-    </Footer>
-  </Container>
-)
+      <ThemeSwap />
+      <Footer>
+        <Text>Typing game, wow ⚡</Text>
+      </Footer>
+    </Container>
+  )
 
 // https://www.datamuse.com/api/
 export const getStaticProps: GetStaticProps = async context => {
   // adjectives describing javascript sorted by how related they are to programming
-  const res = await fetch('https://api.datamuse.com/words?rel_jjb=javascript&topics=programming')
+  const res = await fetch('https://api.datamuse.com/words?rel_rhy=ham')
   const json = await res.json()
   console.log(json);
   return {

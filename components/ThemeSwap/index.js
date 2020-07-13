@@ -1,5 +1,4 @@
-  
-import { useColorMode, Switch } from '@chakra-ui/core'
+  import { useColorMode, Switch } from '@chakra-ui/core'
 
 export const ThemeSwap = () => {
   const { colorMode, toggleColorMode } = useColorMode()

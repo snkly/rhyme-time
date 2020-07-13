@@ -2,13 +2,12 @@ const express = require('express')
 const http = require('http')
 const socketio = require('socket.io')
 const next = require("next");
-//const PlayerManager = require('./playerManager')
+const PlayerManager = require('./playerManager')
 
 const PORT = process.env.PORT || 3000;
 const app = express();
 const server = http.Server(app);
 const io = socketio(server);
-
 
 const dev = process.env.NODE_ENV !== "prodcution";
 const nextApp = next({dev});
@@ -26,33 +25,6 @@ nextApp.prepare().then(() => {
   })
 })
 
-class PlayerManager {
-  constructor() {
-    this.players = Array(8).fill(null);
-  }
-
-  addPlayer(player) {
-    const availableSlot = this.players.indexOf(null);
-    if (availableSlot === -1) {
-      throw new Error("room_is_full");
-    } else {
-      this.players.splice(availableSlot, 1, player);
-    }
-    return player;
-  }
-
-  removePlayerBySocketId(socketId) {
-    const playerIndex = this.players.findIndex(
-      u => u && u.socketId === socketId
-    );
-    if (playerIndex >= 0) {
-      this.players.push(null);
-      return this.players.splice(playerIndex, 1)[0];
-    }
-    return null;
-  }
-}
-
 const pm = new PlayerManager();
 console.log(pm);
 const EVENT = {
@@ -61,10 +33,7 @@ const EVENT = {
   JOIN_ROOM: "join_room",
   JOIN_ROOM_ERROR: "join_room_error",
   LEAVE_ROOM: "leave_room",
-  SUBMIT_ANSWER: "submit_answer",
-  UPDATE_DRAWING: "update_drawing",
-  UPDATE_PLAYER_LIST: "update_player_list",
-  UPDATE_ANSWER_LIST: "update_answer_list"
+  UPDATE_PLAYER_LIST: "update_player_list"
 };
 
 io.on(EVENT.CONNECT, socket => {
