@@ -21,7 +21,7 @@
     "emotion-theming": "^10.0.27",
     "express": "^4.17.1",
     "http": "^0.0.1-security",
-    "next": "^9.4.4",
+    "next": "^11.1.0",
     "node-fetch": "^2.6.0",
     "nodemon": "^2.0.4",
     "react": "^16.13.1",
