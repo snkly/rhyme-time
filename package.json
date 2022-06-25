@@ -22,7 +22,7 @@
     "express": "^4.17.1",
     "http": "^0.0.1-security",
     "next": "^9.4.4",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.7",
     "nodemon": "^2.0.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
